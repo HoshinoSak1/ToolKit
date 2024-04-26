@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "prefabName": "test1",
+    "spritePath": "Assets/Things/Sprites/Tiles/Tiles_72.png",
+    "isCollider": true,
+    "isTrigger": true,
+    "isObstacle": true,
+    "width": 1,
+    "height": 1,
+    "brickType": 0
+  },
+  {
+    "id": 2,
+    "prefabName": "test2",
+    "spritePath": "Assets/Things/Sprites/Tiles/Tiles_131.png",
+    "isCollider": true,
+    "isTrigger": false,
+    "isObstacle": true,
+    "width": 1,
+    "height": 1,
+    "brickType": 0
+  },
+  {
+    "id": 3,
+    "prefabName": "test3",
+    "spritePath": "Assets/Things/Sprites/Tiles/Tiles_246.png",
+    "isCollider": false,
+    "isTrigger": false,
+    "isObstacle": false,
+    "width": 1,
+    "height": 1,
+    "brickType": 0
+  },
+  {
+    "id": 4,
+    "prefabName": "test4",
+    "spritePath": "Assets/Things/Sprites/Tiles/Tiles_357.png",
+    "isCollider": false,
+    "isTrigger": false,
+    "isObstacle": false,
+    "width": 2,
+    "height": 2,
+    "brickType": 1
+  }
+]
