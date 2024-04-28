@@ -270,7 +270,7 @@ public class BrickEditor: OdinEditorWindow
         }
 
         //设置大小
-        prefabGO.transform.localScale = new Vector3(brickData.width, brickData.height, 1);
+        prefabGO.transform.localScale = new Vector3(brickData.width / brickData.sp.bounds.size.x, brickData.height / brickData.sp.bounds.size.y, 1);
 
         //设置特殊砖块对应脚本
         //等待附加

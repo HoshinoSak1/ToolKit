@@ -6,6 +6,8 @@ using Sirenix.OdinInspector;
 using Codice.CM.Client.Differences.Graphic;
 using Sirenix.Utilities.Editor;
 using UnityEditor.VersionControl;
+using Sirenix.Utilities;
+using UnityEditor.PackageManager.UI;
 
 public class MapEditor : OdinMenuEditorWindow
 {
@@ -15,7 +17,12 @@ public class MapEditor : OdinMenuEditorWindow
     [MenuItem("CustomTools/Map Editor")]
     private static void OpenWindow()
     {
-        GetWindow<MapEditor>().Show();
+        var window = GetWindow<MapEditor>();
+        window.position = GUIHelper.GetEditorWindowRect().AlignCenter(600, 800);
+    }
+    public MapEditor()
+    {
+        
     }
 
     private CreateNewMap createNewMap;
@@ -49,11 +56,11 @@ public class MapEditor : OdinMenuEditorWindow
                 string path = AssetDatabase.GetAssetPath(asset);
                 AssetDatabase.DeleteAsset(path);
                 AssetDatabase.SaveAssets();
-
             }
         }
         SirenixEditorGUI.EndHorizontalToolbar();
     }
+
 }
 
 public class CreateNewMap
@@ -83,4 +90,6 @@ public class CreateNewMap
         mapData = ScriptableObject.CreateInstance<MapData>();
         mapData.mapName = "New Map Data";
     }
+
+
 }
