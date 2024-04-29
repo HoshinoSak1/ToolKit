@@ -23,15 +23,16 @@ public class MapData : ScriptableObject
     [OnValueChanged("OnValueChanged")]
     [LabelWidth(200)]
     [ShowInInspector]
-    [TableMatrix(DrawElementMethod = "DrawColoredEnumElement")]
+    [TableMatrix(SquareCells = true, DrawElementMethod = "DrawColoredEnumElement")]
     [Required("设置长宽！")]
     [PropertyOrder(-1)]
     public int[,] mapData;
 
     [LabelWidth(200)]
     [ShowInInspector]
-    [PropertyOrder(-1)]
-    [TableMatrix(SquareCells =true,HideColumnIndices = true,HideRowIndices = true,IsReadOnly = true)]
+    [TableMatrix(SquareCells =true,HideColumnIndices = true,HideRowIndices = true)]
+    [FoldoutGroup("Sprite预览")]
+    [ReadOnly]
     [Required("设置长宽 并 初始化Map Data")]
     public Sprite[,] mapDataView;
 
@@ -68,15 +69,19 @@ public class MapData : ScriptableObject
     [ValueDropdown("GetBrick")]
     [LabelText("砖块")]
     [ShowInInspector]
+    [PropertyOrder(-1)]
     public KeyValuePair<int, string> nowSelectedBrick;
 
     [HorizontalGroup("Brick"), LabelWidth(40)]
     [LabelText("Data")]
     [ReadOnly]
+    [PropertyOrder(-1)]
     public BrickData brickdata;
+
     [HorizontalGroup("Brick"), LabelWidth(20)]
     [PreviewField]
     [ReadOnly]
+    [PropertyOrder(-1)]
     public Sprite sp;
 
     private IEnumerable GetBrick()
@@ -127,18 +132,42 @@ public class MapData : ScriptableObject
 
     private int DrawColoredEnumElement(Rect rect, int value)
     {
+        Texture2D spriteTexture = new Texture2D((int)rect.width, (int)rect.height) ;
         if (Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition))
         {
             if (brickdata == null) return -1;
 
             value = nowSelectedBrick.Key;
-
+            spriteTexture = sp.texture;
             GUI.changed = true;
             Event.current.Use();
         }
+        GUI.DrawTextureWithTexCoords(rect.Padding(1), 
+                value == -1? new Texture2D((int)rect.width, (int)rect.height): GetTexture2D(BrickManager.brickPrefabDir[value].GetComponent<BrickBase>().brickData.sp), 
+                CalculateTexCoords(rect.Padding(1), spriteTexture.width, spriteTexture.height), true);
         return value;
     }
+    Rect CalculateTexCoords(Rect rect, float textureWidth, float textureHeight)
+    {
+        float x = rect.x / textureWidth;
+        float y = rect.y / textureHeight;
+        float width = rect.width / textureWidth;
+        float height = rect.height / textureHeight;
+        return new Rect(rect.position,new Vector2(width, height));
+    }
 
+    Texture2D GetTexture2D(Sprite sprite)
+    {
+        var targetTex = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
+        var pixels = sprite.texture.GetPixels(
+            (int)sprite.textureRect.x,
+            (int)sprite.textureRect.y,
+            (int)sprite.textureRect.width,
+            (int)sprite.textureRect.height);
+        targetTex.SetPixels(pixels);
+        targetTex.Apply();
+        return targetTex;
+    }
 
     [Button("3.创建可视化展示地图")]
     private void CreateMap()

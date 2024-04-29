@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1001,
+    "name": "SOLDIER:76",
+    "level": [
+      1,
+      2
+    ],
+    "WeaponId": [
+      2001,
+      2002
+    ]
+  },
+  {
+    "id": 1002,
+    "name": "Genji",
+    "level": [
+      1
+    ],
+    "WeaponId": [
+      2003
+    ]
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": 3001,
+    "name": "b1",
+    "speed": 100,
+    "LivingTime": 1,
+    "demage": 100
+  },
+  {
+    "id": 3002,
+    "name": "b2",
+    "speed": 50,
+    "LivingTime": 2,
+    "demage": 200
+  },
+  {
+    "id": 3003,
+    "name": "b3",
+    "speed": 100,
+    "LivingTime": 1,
+    "demage": 100
+  },
+  {
+    "id": 3004,
+    "name": "b4",
+    "speed": 200,
+    "LivingTime": 0.5,
+    "demage": 50
+  }
+]
